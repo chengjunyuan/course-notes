@@ -1,3 +1,3 @@
 # Table of contents
 
-* [Linear Mappings](README.md)
+* [Introduction](README.md)
