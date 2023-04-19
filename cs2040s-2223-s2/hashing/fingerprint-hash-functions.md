@@ -1,2 +1,0 @@
-# Fingerprint Hash Functions
-
