@@ -37,7 +37,7 @@
   * [Depth First Search (DFS)](graphs/depth-first-search-dfs.md)
   * [Bellman-Ford](shortest-paths.md)
   * [Dijkstra's Algorithm](minimum-spanning-trees.md)
-  * [Directed Graphs](graphs/directed-graphs.md)
+  * [Topological Sort](graphs/topological-sort.md)
   * [Minimal Spanning Trees](graphs/minimal-spanning-trees.md)
   * [Prim's Algorithm](graphs/prims-algorithm.md)
   * [Kruskal's Algorithm](graphs/kruskals-algorithm.md)
