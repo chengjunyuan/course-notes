@@ -35,14 +35,18 @@ If our program is interpreted by a Java interpreter, the program is read and pro
 
 ## Stack and Heap Diagrams
 
-Let's jump back to our JVM for a while. The JVM manages the memory of Java programs while its bytecode instructions are interpreted and executed. Different JVM implementations may implement these differently, but a typical JVM implementation partitions the memory into several regions, including the **method area** for storing code for the methods; the **metaspace** for storing meta information about classes; the **heap** for storing dynamically allocated objects, and the **stack** for local variables and call frames.
+We now take a closer look at the JVM. The JVM manages the memory of Java programs while its bytecode instructions are interpreted and executed. Different JVM implementations may implement these differently, but a typical JVM implementation partitions the memory into several regions, including the **method area** for storing code for the methods; the **metaspace** for storing meta information about classes; the **heap** for storing dynamically allocated objects, and the **stack** for local variables and call frames.
 
-* The **heap** is the region in memory where all objects are allocated in and stored, while the **stack** is the region where all variables (including primitive types and object references) are allocated in and stored.
-* ![](../.gitbook/assets/image.png)
-* When we invoke methods, the JVM creates a **stack frame** for this instance method call. The stack frame is a region of memory that contains the `this` reference the method arguments, and local variables within the method.
-  * When class methods are called, the stack frame does not contain the `this` reference.
-  * Observe that the references to objects are copied onto the stack frame, while the values of primitives are copied over.
-  * After a method returns, the stack frame for that method is destroyed.
-* To summarize, Java uses **call by value** for primitive types, and **call by reference** for objects. If multiple nested method calls are made, the stack frames get stacked on top of each other.
-* The JVM runs a **garbage collector** that checks for unreferenced objects on the heap and cleans up the memory automatically.
+The **heap** is the region in memory where all objects are allocated in and stored, while the **stack** is the region where all variables (including primitive types and object references) are allocated in and stored.
+
+<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption><p>Example of a stack and heap diagram.</p></figcaption></figure>
+
+When we invoke methods, the JVM creates a **stack frame** for this instance method call. The first stack frame is therefore going to be the stack frame for `main`. The stack frame is a region of memory that contains the `this` reference, the method arguments, and local variables within the method. When a method returns, the stack frame for that method is destroyed.
+
+There are two further details we should note about the stack frames:
+
+1. When class methods are called, the stack frame does not contain the `this` reference, as class methods are not tied to a particular instance of the class.
+2. References to objects are copied onto the stack frame, while the values of primitives are copied over. In other words, Java uses **call by value** for primitive types, and **call by reference** for objects. If multiple nested method calls are made, the stack frames get stacked on top of each other.
+
+Finally, the JVM runs a **garbage collector** that checks for unreferenced objects on the heap and cleans up the memory automatically. This is different from the destruction of stack frames once a method has returned, but serves a similar purpose (decluttering the program).
 

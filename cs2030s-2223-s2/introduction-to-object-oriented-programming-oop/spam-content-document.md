@@ -23,10 +23,10 @@ description: all the content here first
   * The second approach uses an interpreter, software that reads in the program one statement at a time, interprets what the statement means, and executes it.
 * Java programs can be executed in two ways: compilation into bytecode, or interpretation by a Java interpreter.
   * Java can be compiled into bytecode. During execution, bytecode is interpreted and compiled on-the-fly by the **Java Virtual Machine (JVM)** into machine code.
-    * ![](<.gitbook/assets/image (3).png>)
-    * ![](<.gitbook/assets/image (4).png>)
+    * ![](<../.gitbook/assets/image (3).png>)
+    * ![](<../.gitbook/assets/image (4).png>)
   * Java can be interpreted by the Java interpreter.
-    * ![](<.gitbook/assets/image (2).png>)
+    * ![](<../.gitbook/assets/image (2).png>)
 * Tombstone diagrams have the following components:
   * Programs which are implemented in a particular language
   * Language A to Language B interpreters
@@ -34,9 +34,9 @@ description: all the content here first
     * Compilers do more than translate source code into machine code or bytecode; they also need to parse the source code written and check if it follows the precise specification of the programming language used (the **grammar**), and produce a **syntax error** if grammar is violated.
     * This is different from a runtime error, which might occur when a customer is actually using the program
   * Physical machines implementing a particular language.
-  * ![](<.gitbook/assets/image (1).png>)
+  * ![](<../.gitbook/assets/image (1).png>)
   * We can draw tombstone diagrams, as long as the connected components are the same language.
-    * ![](<.gitbook/assets/image (5).png>)
+    * ![](<../.gitbook/assets/image (5).png>)
 * A **variable** is an abstraction that allows us to give a user-friendly name to a piece of data in memory. We use the **variable name** whenever we want toa ccess the **value** in that location, and **pointer to the variable** or **reference to the variable** wheneveer we want to refer to the address of the location.
 * We can assign a **type** to a variable, communicating to the reader what data type the variable is an abstraction over, and to the compiler/interpreter what operations are valid on this variable and how the operation behaves.
   * Python and Javascript are **dynamically typed** programming languages, where the same variable can hold values of different types.
@@ -88,7 +88,7 @@ description: all the content here first
     * Another approach to address this issue is immutability, which will be covered later.
 * Let's jump back to our JVM for a while. The JVM manages the memory of Java programs while its bytecode instructions are interpreted and executed. Different JVM implementations may implement these differently, but a typical JVM implementation partitions the memory into several regions, including the **method area** for storing code for the methods; the **metaspace** for storing meta information about classes; the **heap** for storing dynamically allocated objects, and the **stack** for local variables and call frames.
   * The **heap** is the region in memory where all objects are allocated in and stored, while the **stack** is the region where all variables (including primitive types and object references) are allocated in and stored.
-  * ![](.gitbook/assets/image.png)
+  * ![](../.gitbook/assets/image.png)
   * When we invoke methods, the JVM creates a **stack frame** for this instance method call. The stack frame is a region of memory that contains the `this` reference the method arguments, and local variables within the method.
     * When class methods are called, the stack frame does not contain the `this` reference.
     * Observe that the references to objects are copied onto the stack frame, while the values of primitives are copied over.
