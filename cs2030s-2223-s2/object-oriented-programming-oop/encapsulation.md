@@ -1,3 +1,3 @@
-# Encapsulation
+# 0. Overview
 
 other stuff here

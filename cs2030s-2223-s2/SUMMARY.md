@@ -2,7 +2,7 @@
 
 * [Introduction to Object Oriented Programming (OOP)](README.md)
   * [spam content document](introduction-to-object-oriented-programming-oop/spam-content-document.md)
-  * [0. Overview](introduction-to-object-oriented-programming-oop/0.-overview.md)
+  * [0. Overview](object-oriented-programming-oop/encapsulation.md)
   * [1. Program and Compiler](introduction-to-object-oriented-programming-oop/1.-program-and-compiler.md)
   * [2. Variable and Type](introduction-to-object-oriented-programming-oop/2.-variable-and-type.md)
   * [3. Functions](introduction-to-object-oriented-programming-oop/3.-functions.md)
