@@ -125,3 +125,48 @@ description: all the content here first
     * The method descriptor from the first step is first retrieved, before the run-time type of the target is determined.
     * Let the run-time type of the target be `R`. Java first looks for an accessible method with the matching descriptor in `R`. If no such method is found, Java will continue up the class hierarchy until `Object`. The first method implementation with a matching method descriptor found will be the one executed.
   * This description only applies to instance methods, as class methods do not support dynamic binding. For class methods, the method to invoke is resolved statically during compile time. The same process in the first step is taken, but the corresponding method implementation will always be executed during run-time, without considering the run-time type of the target.
+* The **Liskov Substitution Principle (LSP)** says that "Let `Φ(x)` be a property provable about objects `x` of type `T`. Then `Φ(y)` should be true of objects `y` of type `S` where `S<:T`."
+  * This is a fancy way of saying that a subclass should not break the expectations set by the superclass. In other words, all instances of a parent class should be substitutable by an instance of the subclass.
+    * If it is not substitutable, LSP is volated.
+  * We also realize that it is useful for developers to prevent certain classes from being inherited. We can therefore use the `final` keyword on a class to tell Java that a class cannot be inherited. Alternatively, we can allow inheritance but prevent specific methods from being overriden, through declaring those methods as `final`.
+* We can boost our abstraction game to the next level through the concept of an **abstract class**. In Java, abstract classes are something which have been made into something so general that it cannot and should not be instantiated. This is usually because one or more of its instance methods cannot be implemented without further details.
+  * To declare an abstract class in Java, we add the `abstract` keyword to the class declaration. To make a method abstract, we add the `abstract` keyword when we declare the method.
+  * Abstract methods cannot be implemented and therfore do not have a method body.
+  * Abstract classes only need to have at least one abstrac method.
+  * A class that is not abstract is a **concrete class**. Concrete classes cannot have any abstract methods, and must therefore override all abstract methods of a parent abstract class.
+* One thing we realize is that an abstract class is really just a nice way of saying we want our group of objects to all have the following methods, which each subclass will implement differently.
+  * We can also package this in an abstraction known as an **interface**, which is declared using the `interface` keyword.
+  * All methods in an interface are `public abstract` by default, and we can tell Java that a class implements a particular interface through the `implements` keyword.
+  * Both concrete and abstract classes can implement interfaces.
+  * Take note that a class can only extend from one superclass, but it can implement multiple interfaces. An interface can extend from one or more other interfaces, but an interface cannot extend from another class.
+  * If a class `C` implements an interface `I`, `C<:I`. This definition implies that a type can have multiple supertypes.
+    * This is cool, because it means that we can declare variables as being of an interface type, although they're actually referencing an object that implements that interface.
+    * It even allows explicit type casting to an interface, since the Java compiler cannot rule out the possibility that a subclass implements an interface as well.
+  * Java actually allows interfaces to provide default implementation of methods that all implementation subclasses will inherit (unless they override it). These methods are tagged with the `default` keyword and leads to inelegant situations where an interface has both abstract and non-abstract methods. These are referred to as **impure interfaces**, and will not be discussed in CS2030S.
+* Java also provides **wrapper classes** for each of its primitive types. Wrapper classes encapsulate a type, rather than fields and methods.
+  * This lets us work with primitive types as though they were objects, which lets us use methods on them too.
+  * All primitive wrapper classes are **immutable** - once an object is created, it cannot be changed.
+  * As changing between the primitive type and its wrapper class is pretty common, Java provides a feature called **auto-boxing/unboxing** to perform type conversions between primitive types and its wrapper class.
+  * Although working with wrapper classes is nice, we also want to somewhat avoid this, because it comes with costs for allocating memory and collecting garbage afterwards, making it less efficient than primitive types.
+* **Type casting** is a way for programmers to tell the compiler to trust that the objects returned by a method are of a specific run-time type. We type cast through the addition of `(Type)` in front of an object reference when declaring variables or some shit idk
+* Unfortunately, the subtype relationship between complex types such as arrays is nontrivial. The **variance of types** refers to how the subtype relationship between complex types relates to the subtype relationship between components.
+  * Let `C(S)` correspond to some complex type based on type `S`; an array of type `S` is an example of a complex type.
+  * A complex type is **covariant** if `S<:T` implies `C(S)<:C(T)`.
+  * A complex type is **contravariant** if `S<:T` implies `C(T)<:C(S)`.
+  * A complex type is **invariant** if it is neither covariant nor contravariant.
+  * Arrays of rerence types are covariant in Java, which unfortunately leads to some dangers down the lines with run-time types.
+* Let us talk about one other issue: exception handling. In Java, exception handling is performed using the `try`, `catch`, and `finally` keywords, along with a hierarchy of `Exception` classes.
+  * The `try`-`catch`-`finally` framework allows us to handle exceptions.
+  * However, if we want to throw an exception, we need to use the `throws` keyword to declare that our method will throw an exception. Furthermore, we will need to create a new `Exception` object and throw it to the caller using the `throw` keyword.
+  * Java distinguishes between two types of exceptions: checked and unchecked exceptions.
+    * An **unchecked exception** is an exception caused by programmer error, and should not happen if perfect code is written. These errors are usually not explicitly caught or thrown. In Java, all unchecked exceptions are subclasses of the class `RuntimeException`.
+    * A **checked exception** is an exception that a programmer has no control over. Checked exceptions must be handled, or the program will not compile.
+  * If unchecked exceptions are not caught, they will propagate down the stack until they are either caught or an error message is displayed to the user.
+  * Checked exceptions must be handled. Good programs handle checked exceptions gracefully and hide the details from the user.
+  * Note that the `finally` block is always executed even if a `return` or `throw` statement is written in a `catch` block.
+  * We can also write our own exceptions by inheriting an existing exception. However, we should only create new exception types if we need them to provide more useful information to the exception handler.
+  * When we override a method that throws a checked exception, the overriding method must throw only the same, or a more specific checked exception, than the overriden method. This helps the method obey LSP.
+  * **Pokemon Exception Handling** is catching the `Exception` class exception within a `catch` block. This is terrible, because every exception will be caught and we won't know if our program is throwing unintended exceptions as well.
+  * We should, as much as possible, handle the implementation-specific exceptions within the abstraction barrier.
+  * Finally, don't use exceptions as a control flow mechanism.
+  * Java also has an `Error` class for situations where the program should terminate as there is no way to recover from the error. For example, a `StackOverflowError` and `OutOfMemoryError` occur when the stack or the heap is full. In CS2030S, we don't need to create or care about such errors.
